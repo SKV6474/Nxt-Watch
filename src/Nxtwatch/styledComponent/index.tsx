@@ -781,12 +781,8 @@ export const GameDataCardDiv = styled.div`
 `;
 
 export const GameThumbUrl = styled.img`
-  height: 375px;
   width: 95%;
   margin-bottom: 20px;
-  @media screen and (max-width: 576px) {
-    height: 250px;
-  }
 `;
 
 export const ShortDataGame = styled.div`
