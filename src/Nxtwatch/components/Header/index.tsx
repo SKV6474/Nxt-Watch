@@ -41,14 +41,13 @@ const HeaderComponent = (props: Props) => {
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
-
+  const value = localStorage.getItem("i18nextLng");
   useEffect(() => {
-    const value = localStorage.getItem("i18nextLng");
     if (value === "en" || value === "hindi") {
       (document.getElementById("Language") as HTMLInputElement).value = value;
       i18n.changeLanguage(value);
     }
-  });
+  }, [value]);
 
   const handleThemeChange = () => {
     toggleTheme.toggleThemeMode();
