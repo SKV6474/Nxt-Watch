@@ -74,7 +74,12 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
   return (
     <>
       <VideoPlayer>
-        <ReactPlayer url={videoDetails?.video_url} width="100%" height="100%" />
+        <ReactPlayer
+          url={videoDetails?.video_url}
+          width="100%"
+          height="100%"
+          controls
+        />
       </VideoPlayer>
       <VideoTitle>{videoDetails?.title}</VideoTitle>
       <VideoDetailIntractionContainer>
