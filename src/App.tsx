@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Redirect, Switch } from "react-router-dom";
 
-function App() {
+import { NxtWatchRouteContainer } from "./Nxtwatch/routes";
+import { AuthenticationRoute } from "./Authentication/routes";
+
+import { toggleTheme } from "./Nxtwatch/stores";
+import { saveList } from "./Nxtwatch/stores";
+
+import { Provider } from "mobx-react";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider saveList={saveList} toggleTheme={toggleTheme}>
+      <>
+        <BrowserRouter>
+          <Switch>
+            {AuthenticationRoute}
+            {NxtWatchRouteContainer}
+            <Redirect to="/not-found" />
+          </Switch>
+        </BrowserRouter>
+      </>
+    </Provider>
   );
-}
+};
 
 export default App;
