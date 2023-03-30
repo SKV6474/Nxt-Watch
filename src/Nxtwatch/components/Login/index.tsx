@@ -63,6 +63,7 @@ const LoginComponent = (props: LoginSubmit) => {
             <LogoImg css={""} />
           </LogoImgContainer>
           <form onSubmit={handleSubmit}>
+            {/* UserName input */}
             <InputDiv>
               <Label>{t("username")}</Label>
               <UserInput
@@ -75,6 +76,8 @@ const LoginComponent = (props: LoginSubmit) => {
                 onChange={handleUserName}
               />
             </InputDiv>
+
+            {/* Password Input */}
             <InputDiv>
               <Label>{t("password")}</Label>
               <Input
@@ -92,6 +95,7 @@ const LoginComponent = (props: LoginSubmit) => {
             <LoginBtn type="submit">
               <b>{t("login")}</b>
             </LoginBtn>
+
             <LanguageChangeComponent />
             <ErrorP id="Error"></ErrorP>
           </form>
