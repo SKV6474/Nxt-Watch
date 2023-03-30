@@ -12,9 +12,6 @@ import {
   Input,
   InputDiv,
   Label,
-  LanguageDiv,
-  LanguageEn,
-  LanguageHindi,
   LoginBtn,
   LoginDiv,
   LoginWrapper,
@@ -22,11 +19,12 @@ import {
   ShowDiv,
   UserInput,
 } from "../../styledComponent";
-import { sendToLocalStorage } from "../../utils";
+
+import LanguageChangeComponent from "./LanguageContainer";
 
 const LoginComponent = (props: LoginSubmit) => {
   const { onSubmitForm } = props;
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [userDetails, setUserDeatail] = useState<UserDeatailsType>({
@@ -94,24 +92,7 @@ const LoginComponent = (props: LoginSubmit) => {
             <LoginBtn type="submit">
               <b>{t("login")}</b>
             </LoginBtn>
-            <LanguageDiv>
-              <LanguageEn
-                onClick={() => {
-                  i18n.changeLanguage("en");
-                  sendToLocalStorage("i18nextLng", "en");
-                }}
-              >
-                English
-              </LanguageEn>
-              <LanguageHindi
-                onClick={() => {
-                  i18n.changeLanguage("hindi");
-                  sendToLocalStorage("i18nextLng", "hindi");
-                }}
-              >
-                हिंदी
-              </LanguageHindi>
-            </LanguageDiv>
+            <LanguageChangeComponent />
             <ErrorP id="Error"></ErrorP>
           </form>
         </LoginDiv>
