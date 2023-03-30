@@ -8,8 +8,7 @@ import {
 
 import WithHeader from "../../../Nxtwatch/hocs/withHeaderHoc";
 import WithSideBar from "../../../Nxtwatch/hocs/withSideBarHoc";
-
-import { toggleTheme } from "../../../Nxtwatch/stores";
+import { Themes } from "../../../Nxtwatch/stores";
 
 import { SideContentContainer } from "../../../Nxtwatch/styledComponent";
 import {
@@ -25,7 +24,7 @@ const NotFoundPage = () => {
   return (
     <SideContentContainer>
       <NotFoundContainer>
-        {toggleTheme.Theme === "light" ? (
+        {Themes.Theme === "light" ? (
           <NotFoundImg
             src={NXT_WATCH_NOT_FOUND_LIGHT_THEME}
             alt="Not Found"

@@ -14,7 +14,6 @@ import {
 
 const LogOutPopup = (props: LogoutFunctions) => {
   const { t } = useTranslation();
-
   const { onCancel, onConfirm } = props;
 
   const handleCancelEvent = () => {

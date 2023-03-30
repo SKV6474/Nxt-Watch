@@ -1,6 +1,9 @@
 import { Route } from "react-router-dom";
-import LoginRoute from "../../Nxtwatch/routes/LoginPage";
+
+import { LOGIN } from "../constants/Path";
+
+import LoginRoute from "./LoginPage";
 
 export const AuthenticationRoute = [
-  <Route key="/login" exact path="/login" component={LoginRoute} />,
+  <Route key={LOGIN} exact path={LOGIN} component={LoginRoute} />,
 ];

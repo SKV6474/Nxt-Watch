@@ -3,25 +3,28 @@ import { BrowserRouter, Redirect, Switch } from "react-router-dom";
 import { NxtWatchRouteContainer } from "./Nxtwatch/routes";
 import { AuthenticationRoute } from "./Authentication/routes";
 
-import { toggleTheme } from "./Nxtwatch/stores";
+import { Themes } from "./Nxtwatch/stores";
 import { saveList } from "./Nxtwatch/stores";
 
-import { Provider } from "mobx-react";
+import { observer, Provider } from "mobx-react";
+import { ThemeProvider } from "styled-components";
+import { DarkTheme, LightTheme } from "./Nxtwatch/constants/Color";
 
-const App = () => {
+const App = observer(() => {
   return (
-    <Provider saveList={saveList} toggleTheme={toggleTheme}>
-      <>
-        <BrowserRouter>
-          <Switch>
-            {AuthenticationRoute}
-            {NxtWatchRouteContainer}
-            <Redirect to="/not-found" />
-          </Switch>
-        </BrowserRouter>
-      </>
+    <Provider saveList={saveList}>
+      <ThemeProvider theme={Themes.Theme === "light" ? LightTheme : DarkTheme}>
+        <>
+          <BrowserRouter>
+            <Switch>
+              {AuthenticationRoute}
+              {NxtWatchRouteContainer}
+              <Redirect to="/not-found" />
+            </Switch>
+          </BrowserRouter>
+        </>
+      </ThemeProvider>
     </Provider>
   );
-};
-
+});
 export default App;

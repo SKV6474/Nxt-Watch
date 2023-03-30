@@ -6,7 +6,7 @@ import GameList from "./GameListStore";
 
 import SaveList from "./SaveListStore";
 
-import Theme from "./ThemeStore";
+import ThemeStore from "./ThemeStore";
 
 export const homeList = new HomeList();
 
@@ -16,4 +16,4 @@ export const trendingList = new TrendingList();
 
 export const saveList = new SaveList();
 
-export const toggleTheme = new Theme();
+export const Themes = new ThemeStore();

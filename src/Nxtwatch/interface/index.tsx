@@ -65,9 +65,9 @@ export enum ApiStatus {
 }
 
 export type LoadingWrapperProp = {
+  css: string;
   apiStatus: ApiStatus;
-  renderLoadingUi: () => JSX.Element;
-  renderFailureUi: () => JSX.Element;
+  type: string;
   renderSuccessUi: () => JSX.Element;
 };
 

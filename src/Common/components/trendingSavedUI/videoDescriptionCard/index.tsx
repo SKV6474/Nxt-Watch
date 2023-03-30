@@ -19,30 +19,30 @@ import {
 } from "../../../../Nxtwatch/styledComponent";
 
 const VideoDescriptionCard = (props: { Data: TrendingOrSaved }) => {
-  const { Data } = props;
   const { t } = useTranslation();
+  const { Data } = props;
+  const { id, thumbnail_url, channel, title, view_count, published_at } = Data;
+  const { name, profile_image_url } = channel;
 
   return (
-    <VideoLink to={`/videos/${Data.id}`}>
+    <VideoLink to={`/videos/${id}`}>
       <CardContainer>
-        <ThumnUrlImg src={Data.thumbnail_url} alt="thumbUrl"></ThumnUrlImg>
+        <ThumnUrlImg src={thumbnail_url} alt="thumbUrl"></ThumnUrlImg>
         <ChennelInfo>
           <ToHideProfile>
-            <ChannelProfile
-              src={Data.channel.profile_image_url}
-            ></ChannelProfile>
+            <ChannelProfile src={profile_image_url}></ChannelProfile>
           </ToHideProfile>
           <div>
-            <VideoTitleStyle>{Data.title}</VideoTitleStyle>
+            <VideoTitleStyle>{title}</VideoTitleStyle>
             <VideoCardData>
-              <div>{Data.channel.name}</div>
+              <div>{name}</div>
               <DotUpper>
                 <Dot />
               </DotUpper>
               <ViewsandTime>
-                {`${Data.view_count}`} {t("views")}
+                {`${view_count}`} {t("views")}
                 <Dot />
-                {`${getTime(Data.published_at)}`} {t("years ago")}
+                {`${getTime(published_at)}`} {t("years ago")}
               </ViewsandTime>
             </VideoCardData>
           </div>

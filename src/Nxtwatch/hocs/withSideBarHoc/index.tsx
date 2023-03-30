@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import SplitPane from "react-split-pane";
 
 import Link from "../../components/Links";
 import { Props } from "../../interface";
@@ -14,18 +15,34 @@ import {
   ContactSupport,
   ContactImg,
   ContactContainer,
-  SideWithContentContainer,
   ContactDescription,
 } from "../../styledComponent";
+
+import "./index.css";
+import { getFromLocalStorage, sendToLocalStorage } from "../../utils";
 
 const WithSideBar = (
   WrappedComponent: React.ComponentType<any>
 ): React.ComponentType<any> => {
   const SideBar = (props: Props) => {
     const { t } = useTranslation();
+    let width = getFromLocalStorage("SplitPane");
+    if (width === undefined) {
+      width = 230;
+    }
 
     return (
-      <SideWithContentContainer>
+      //@ts-ignore
+      <SplitPane
+        className="splitPane"
+        split="vertical"
+        minSize={185}
+        defaultSize={width}
+        maxSize={475}
+        onChange={(size: number) => {
+          sendToLocalStorage("SplitPane", size);
+        }}
+      >
         <SideBarDiv>
           <div>
             <Link />
@@ -49,7 +66,7 @@ const WithSideBar = (
           </ContactSupport>
         </SideBarDiv>
         <WrappedComponent {...props} />
-      </SideWithContentContainer>
+      </SplitPane>
     );
   };
   return SideBar;

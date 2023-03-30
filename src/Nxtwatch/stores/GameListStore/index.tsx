@@ -1,25 +1,30 @@
-import Cookies from "js-cookie";
 import { action, observable } from "mobx";
 
+import { CallGameApi } from "../../services/index.api";
 import { ApiStatus, GameObject } from "../../interface";
-
 class GameList {
   @observable GamingList: GameObject[] = [];
   @observable ApiStatus: ApiStatus = ApiStatus.loading;
+  GamingListContainer: GameObject[] = [];
 
   @action.bound
   fetchGameData = async () => {
-    const response = await fetch("https://apis.ccbp.in/videos/gaming", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${Cookies.get("jwt_token")}` },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      this.GamingList = data.videos;
-      this.ApiStatus = ApiStatus.success;
-    } else {
+    try {
+      const Response = await CallGameApi();
+
+      this.ApiStatus = Response.ApiStatus;
+      if (Response.data !== "none") {
+        this.GamingList = Response.data.videos;
+        this.GamingListContainer = Response.data.videos;
+      }
+    } catch (e) {
       this.ApiStatus = ApiStatus.failure;
     }
+  };
+
+  @action.bound
+  filterList = (list: GameObject[]) => {
+    this.GamingList = [...list];
   };
 }
 

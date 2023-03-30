@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 
-import Loader from "../../../Common/components/Loader";
 import LoadingWrapper from "../../../Common/components/LoadingWrapper";
-import Failure from "../../../Common/components/Failure";
+
+import { CallVideoApi } from "../../services/index.api";
 
 import WithHeader from "../../hocs/withHeaderHoc/index";
 import WithSideBar from "../../hocs/withSideBarHoc/index";
@@ -15,7 +14,6 @@ import { saveList } from "../../stores";
 import {
   SideContentContainer,
   VideoDetailContainer,
-  VideoFetchFailureContainer,
   VideoLoaderContainer,
 } from "../../styledComponent";
 
@@ -29,17 +27,13 @@ const VideoItemDetailsRoute = (props: Props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`https://apis.ccbp.in/videos/${id}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${Cookies.get("jwt_token")}` },
-      });
+      const Response = await CallVideoApi(id);
 
-      if (response.ok) {
-        const data = await response.json();
-        setVideoDetails(data.video_details);
-        setApiStatus(ApiStatus.success);
+      if (Response.data !== "none") {
+        setVideoDetails(Response.data.video_details);
+        setApiStatus(Response.ApiStatus);
       } else {
-        setApiStatus(ApiStatus.failure);
+        setApiStatus(Response.ApiStatus);
       }
     };
     fetchData();
@@ -51,30 +45,14 @@ const VideoItemDetailsRoute = (props: Props) => {
     return <VideoDetail videoDetails={videoDetails} index={index} />;
   };
 
-  const renderLoadingView = () => {
-    return (
-      <VideoLoaderContainer>
-        <Loader />
-      </VideoLoaderContainer>
-    );
-  };
-
-  const renderFailureView = () => {
-    return (
-      <VideoFetchFailureContainer>
-        <Failure />
-      </VideoFetchFailureContainer>
-    );
-  };
-
   return (
     <>
       <SideContentContainer>
         <VideoDetailContainer>
           <LoadingWrapper
+            css={VideoLoaderContainer}
+            type="video"
             apiStatus={apiStatus}
-            renderLoadingUi={renderLoadingView}
-            renderFailureUi={renderFailureView}
             renderSuccessUi={renderVideoList}
           />
         </VideoDetailContainer>

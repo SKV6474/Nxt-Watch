@@ -28,7 +28,7 @@ export const FailureContent = styled.div`
 export const FailureContentTitle = styled.div`
   font-size: 25px;
   margin: 40px 0 30px;
-  color: ${(props) => props.theme.color};
+  color: ${(props) => props.theme.COLOR};
   @media screen and (max-width: 576px) {
     font-size: 19px;
     margin: 30px 0 20px;

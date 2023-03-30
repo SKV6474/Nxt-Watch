@@ -5,8 +5,6 @@ import { TrendingSavedUIContainer } from "../../../Nxtwatch/styledComponent";
 
 import VideoDescriptionCard from "./videoDescriptionCard";
 
-// props will be list of object for both saved and trending
-
 const TrendingSavedUI = (props: { DataList: TrendingOrSaved[] }) => {
   const { DataList } = props;
 

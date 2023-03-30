@@ -1,37 +1,56 @@
 import ProtectedRoute from "../../Authentication/components/ProtectedRoute";
+import NotFoundPage from "../../Common/components/NotFoundPage";
+
+import {
+  GAMING_ROUTE,
+  HOME_ROUTE,
+  NOT_FOUND_ROUTE,
+  SAVED_VIDEO_ROUTE,
+  TRENDING_ROUTE,
+  VIDEO_DETAILS_ROUTE,
+} from "../constants/RoutePath";
 
 import HomeRoute from "./HomePage/index";
 import VideoItemDetailsRoute from "./VideoItemDetailsPage/index";
 import TrendingRoute from "./TrendingPage/index";
 import GamingRoute from "./GamingPage/index";
 import SavedVideosRoute from "./SavedVideosPage/index";
-import NotFoundPage from "../../Common/components/NotFoundPage";
 
 const NxtWatchRouteContainer = [
-  <ProtectedRoute key="/" exact path="/" component={HomeRoute} />,
   <ProtectedRoute
-    key="/videos/:id"
+    key={HOME_ROUTE}
     exact
-    path="/videos/:id"
+    path={HOME_ROUTE}
+    component={HomeRoute}
+  />,
+  <ProtectedRoute
+    key={VIDEO_DETAILS_ROUTE}
+    exact
+    path={VIDEO_DETAILS_ROUTE}
     component={VideoItemDetailsRoute}
   />,
   <ProtectedRoute
-    key="/trending"
+    key={TRENDING_ROUTE}
     exact
-    path="/trending"
+    path={TRENDING_ROUTE}
     component={TrendingRoute}
   />,
-  <ProtectedRoute key="/gaming" exact path="/gaming" component={GamingRoute} />,
   <ProtectedRoute
-    key="/saved-videos"
+    key={GAMING_ROUTE}
     exact
-    path="/saved-videos"
+    path={GAMING_ROUTE}
+    component={GamingRoute}
+  />,
+  <ProtectedRoute
+    key={SAVED_VIDEO_ROUTE}
+    exact
+    path={SAVED_VIDEO_ROUTE}
     component={SavedVideosRoute}
   />,
   <ProtectedRoute
-    key="/not-found"
+    key={NOT_FOUND_ROUTE}
     exact
-    path="/not-found"
+    path={NOT_FOUND_ROUTE}
     component={NotFoundPage}
   />,
 ];

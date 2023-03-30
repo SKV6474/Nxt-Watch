@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { RemoveCookies } from "../../../Authentication/utils";
-
 import LogoImg from "../../../Common/components/logoImg";
 
 import { Props } from "../../interface";
-import { toggleTheme } from "../../stores";
+import { Themes } from "../../stores";
 
 import LogOutPopup from "../PopupDesignPage/logOut";
 import Menu from "../PopupDesignPage/menuBox";
@@ -35,13 +34,20 @@ import {
   ThemeImgContainer,
 } from "../../styledComponent";
 
+import {
+  getFromLocalStorage,
+  removeAllDataFromLocalStorage,
+  sendToLocalStorage,
+} from "../../utils";
+
 const HeaderComponent = (props: Props) => {
   const { history } = props;
   const { t, i18n } = useTranslation();
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
-  const value = localStorage.getItem("i18nextLng");
+  const value = getFromLocalStorage("i18nextLng");
+
   useEffect(() => {
     if (value === "en" || value === "hindi") {
       (document.getElementById("Language") as HTMLInputElement).value = value;
@@ -50,12 +56,13 @@ const HeaderComponent = (props: Props) => {
   }, [value]);
 
   const handleThemeChange = () => {
-    toggleTheme.toggleThemeMode();
+    Themes.toggleThemeMode();
   };
 
   const handleConfirmedLogout = () => {
     history.replace("/login");
     RemoveCookies();
+    removeAllDataFromLocalStorage();
   };
 
   const handleToggleLogoutCancel = () => {
@@ -71,11 +78,10 @@ const HeaderComponent = (props: Props) => {
       .value;
     if (Language === "en") {
       i18n.changeLanguage(Language);
-      localStorage.setItem("i18nextLng", Language);
     } else if (Language === "hindi") {
       i18n.changeLanguage(Language);
-      localStorage.setItem("i18nextLng", Language);
     }
+    sendToLocalStorage("i18nextLng", Language);
   };
 
   return (
@@ -90,7 +96,7 @@ const HeaderComponent = (props: Props) => {
         </select>
         <ThemeImgContainer
           style={{
-            marginLeft: toggleTheme.Theme === "light" ? "5px" : "0",
+            marginLeft: Themes.Theme === "light" ? "5px" : "0",
           }}
         >
           <DarkImg
@@ -107,7 +113,7 @@ const HeaderComponent = (props: Props) => {
         </ThemeImgContainer>
         <Profile>
           <ProfileImg src={NXT_WATCH_PROFILE} alt="profile"></ProfileImg>
-          {toggleTheme.Theme === "light" ? (
+          {Themes.Theme === "light" ? (
             <MenuImg
               onClick={handleToggleMenuShow}
               src={MENU_BAR_LIGHT_THEME}
@@ -122,7 +128,7 @@ const HeaderComponent = (props: Props) => {
           )}
         </Profile>
         <div>
-          {toggleTheme.Theme === "light" ? (
+          {Themes.Theme === "light" ? (
             <Logoutimg
               onClick={handleToggleLogoutCancel}
               src={LOGOUT_LIGHT_THEME}

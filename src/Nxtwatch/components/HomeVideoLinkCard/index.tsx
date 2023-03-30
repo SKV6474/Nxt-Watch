@@ -18,25 +18,28 @@ import {
 const VideoCard = (props: { object: VideosList }) => {
   const { t } = useTranslation();
   const { object } = props;
+  const { id, published_at, channel, thumbnail_url, title, view_count } =
+    object;
+  const { name, profile_image_url } = channel;
 
-  const timeline = getTime(object.published_at);
+  const timeline = getTime(published_at);
 
   return (
-    <VideoLink to={`/videos/${object.id}`}>
+    <VideoLink to={`/videos/${id}`}>
       <Card>
-        <ThumbUrl src={object.thumbnail_url} alt="thumbanil"></ThumbUrl>
+        <ThumbUrl src={thumbnail_url} alt="thumbanil"></ThumbUrl>
         <VideoDataContainer>
           <ChannelProfileContainer>
             <ChannelProfile
-              src={object.channel.profile_image_url}
+              src={profile_image_url}
               alt="channel"
             ></ChannelProfile>
           </ChannelProfileContainer>
           <div>
-            <div>{object.title}</div>
-            <DataContainer>{object.channel.name}</DataContainer>
+            <div>{title}</div>
+            <DataContainer>{name}</DataContainer>
             <DataContainer>
-              {`${object.view_count}`} {t("views")} <Dot /> {`${timeline}`}{" "}
+              {`${view_count}`} {t("views")} <Dot /> {`${timeline}`}{" "}
               {t("years ago")}
             </DataContainer>
           </div>

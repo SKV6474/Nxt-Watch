@@ -128,7 +128,7 @@ export const SideBarDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 230px;
+  width: 100%;
   @media screen and (max-width: 768px) {
     display: none;
   }
@@ -333,6 +333,13 @@ export const LanguageDiv = styled.div`
   margin-top: 10px;
 `;
 
+export const LanguageHindi = styled.div`
+  cursor: pointer;
+`;
+
+export const LanguageEn = styled(LanguageHindi)`
+  margin-right: 10px;
+`;
 export const LogoImgContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -427,11 +434,12 @@ export const SideContentContainer = styled.div`
   }
   overflow-y: auto;
   height: calc(100vh - 78px);
-  width: calc(100% - 230px);
+  width: 100%;
   background-color: ${(props) => props.theme.SIDE_CONTENT_CONTAINER_BG_COLOR};
   color: white;
   @media screen and (max-width: 768px) {
     width: 100%;
+    height: calc(100vh - 65px);
   }
 `;
 
@@ -483,19 +491,33 @@ export const SearchVideoListContainer = styled.div`
   padding: 20px;
   @media screen and (max-width: 576px) {
     padding: 20px 0;
+    width: 100vw;
   }
 `;
 
 export const SearchBar = styled.div`
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   @media screen and (max-width: 576px) {
     padding: 0 20px;
+    flex-direction: column;
+  }
+`;
+
+export const SearchImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media screen and (max-width: 576px) {
+    width: 95vw;
+    margin-bottom: 5px;
   }
 `;
 
 export const SearchInput = styled.input`
   color: #909090;
   width: 400px;
+  height: 38px;
   padding: 5px 10px;
   outline: none;
   background-color: ${(props) => props.theme.SEARCH_INPUT_BG_COLOR};
@@ -513,7 +535,7 @@ export const SearchImg = styled.i`
 
 // Home video Card
 
-export const HomeLoaderContianer = styled.div`
+export const HomeLoaderContianer = `
   display: flex;
   align-items: center;
   justify-content: center;
@@ -649,6 +671,7 @@ export const RetryBtn = styled.button`
 
 export const VideoDetailContainer = styled.div`
   padding: 20px;
+  height: calc(100% - 40px);
 `;
 
 export const VideoFetchFailureContainer = styled.div`
@@ -658,7 +681,7 @@ export const VideoFetchFailureContainer = styled.div`
   height: 850px;
 `;
 
-export const VideoLoaderContainer = styled.div`
+export const VideoLoaderContainer = `
   display: flex;
   justify-content: center;
   align-items: center;
@@ -740,7 +763,7 @@ export const VideoDescriptionContainer = styled.div`
 
 // Trending
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled.div<{ css: string }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -834,4 +857,13 @@ export const NoSavedContentDescription = styled.div`
   height: 22px;
   font-size: 16px;
   color: ${(props) => props.theme.UPPER_CHILD_TEXT_COLOR};
+`;
+
+export const FilterListWrapper = styled.div`
+  padding-left: 50px;
+  margin-top: 5px;
+  @media screen and (max-width: 576px) {
+    padding-left: 0px;
+    text-align: center;
+  }
 `;

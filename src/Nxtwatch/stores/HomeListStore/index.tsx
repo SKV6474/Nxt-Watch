@@ -1,28 +1,30 @@
-import Cookies from "js-cookie";
 import { action, observable } from "mobx";
 
 import { ApiStatus, VideosList } from "../../interface";
+import { CallHomeApi } from "../../services/index.api";
 
 class HomeList {
   @observable HomeList: VideosList[] = [];
   @observable ApiStatus: ApiStatus = ApiStatus.loading;
+  HomeListContainer: VideosList[] = [];
 
   @action.bound
   fetchHomeData = async (input: string) => {
-    const response = await fetch(
-      `https://apis.ccbp.in/videos/all?search=${input}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${Cookies.get("jwt_token")}` },
+    try {
+      const Response = await CallHomeApi(input);
+      this.ApiStatus = Response.ApiStatus;
+      if (Response.data !== "none") {
+        this.HomeList = Response.data.videos;
+        this.HomeListContainer = Response.data.videos;
       }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      this.HomeList = data.videos;
-      this.ApiStatus = ApiStatus.success;
-    } else {
+    } catch (e) {
       this.ApiStatus = ApiStatus.failure;
     }
+  };
+
+  @action.bound
+  filterList = (list: VideosList[]) => {
+    this.HomeList = [...list];
   };
 }
 

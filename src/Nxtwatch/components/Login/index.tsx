@@ -13,6 +13,8 @@ import {
   InputDiv,
   Label,
   LanguageDiv,
+  LanguageEn,
+  LanguageHindi,
   LoginBtn,
   LoginDiv,
   LoginWrapper,
@@ -20,6 +22,7 @@ import {
   ShowDiv,
   UserInput,
 } from "../../styledComponent";
+import { sendToLocalStorage } from "../../utils";
 
 const LoginComponent = (props: LoginSubmit) => {
   const { onSubmitForm } = props;
@@ -92,24 +95,22 @@ const LoginComponent = (props: LoginSubmit) => {
               <b>{t("login")}</b>
             </LoginBtn>
             <LanguageDiv>
-              <div
-                style={{ cursor: "pointer", marginRight: "10px" }}
+              <LanguageEn
                 onClick={() => {
                   i18n.changeLanguage("en");
-                  localStorage.setItem("i18nextLng", "en");
+                  sendToLocalStorage("i18nextLng", "en");
                 }}
               >
                 English
-              </div>
-              <div
-                style={{ cursor: "pointer" }}
+              </LanguageEn>
+              <LanguageHindi
                 onClick={() => {
                   i18n.changeLanguage("hindi");
-                  localStorage.setItem("i18nextLng", "hindi");
+                  sendToLocalStorage("i18nextLng", "hindi");
                 }}
               >
                 हिंदी
-              </div>
+              </LanguageHindi>
             </LanguageDiv>
             <ErrorP id="Error"></ErrorP>
           </form>

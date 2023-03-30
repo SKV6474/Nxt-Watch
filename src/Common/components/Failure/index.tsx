@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { toggleTheme } from "../../../Nxtwatch/stores";
+import { Themes } from "../../../Nxtwatch/stores";
 import {
   FAILURE_VIEW_DARK,
   FAILURE_VIEW_LIGHT,
@@ -20,7 +20,7 @@ const Failure = () => {
   const { t } = useTranslation();
   return (
     <FailureContainer>
-      {toggleTheme.Theme === "light" ? (
+      {Themes.Theme === "light" ? (
         <FailureImg src={FAILURE_VIEW_LIGHT} alt="Failure View"></FailureImg>
       ) : (
         <FailureImg src={FAILURE_VIEW_DARK} alt="Failure view"></FailureImg>

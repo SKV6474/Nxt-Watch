@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 
-import Failure from "../../../Common/components/Failure";
-import Loader from "../../../Common/components/Loader";
 import LoadingWrapper from "../../../Common/components/LoadingWrapper";
 
 import WithHeader from "../../hocs/withHeaderHoc";
@@ -12,9 +10,11 @@ import WithSideBar from "../../hocs/withSideBarHoc";
 import HomeBanner from "../../components/HomeBanner";
 import VideoCard from "../../components/HomeVideoLinkCard";
 import NoSearchResults from "../../components/NoSearchsResults";
+import FilterList from "../../../Common/components/Filter";
 
 import { VideosList } from "../../interface";
 import { homeList } from "../../stores";
+import { getFromLocalStorage, sendToLocalStorage } from "../../utils";
 
 import {
   SearchVideoListContainer,
@@ -22,22 +22,33 @@ import {
   SearchInput,
   SearchImg,
   AllCardContainer,
-  HomeLoaderContianer,
   SideContentContainer,
+  SearchImageContainer,
+  HomeLoaderContianer,
 } from "../../styledComponent";
 
 const HomeRoute = observer(() => {
   const { t } = useTranslation();
-  const [isBannerClose, setIsBannerClose] = useState(false);
-
   const videoList = homeList.HomeList;
+
+  let bannerStatus = getFromLocalStorage("Banner");
+  if (bannerStatus === null) {
+    bannerStatus = false;
+  }
+  const [isBannerClose, setIsBannerClose] = useState(bannerStatus);
+
+  const FilterdList = (list: any) => {
+    homeList.filterList(list);
+  };
 
   const handleRemoveBanner = () => {
     setIsBannerClose(true);
+    sendToLocalStorage("Banner", true);
   };
 
   useEffect(() => {
-    if (homeList.ApiStatus === "failure" || homeList.ApiStatus === "loading") {
+    if (homeList.ApiStatus !== "success") {
+      console.log(" Home Route");
       homeList.fetchHomeData("");
     }
   }, []);
@@ -54,58 +65,56 @@ const HomeRoute = observer(() => {
     (document.getElementById("SearchInput") as HTMLInputElement).focus();
   };
 
-  let VideoList:
-    | string
-    | number
-    | boolean
-    | JSX.Element[]
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
-    | React.ReactFragment
-    | null
-    | undefined;
-
+  let VideoList: JSX.Element[];
   if (videoList.length > 0) {
     VideoList = videoList.map((ele: VideosList) => (
       <VideoCard key={ele.id} object={ele} />
     ));
   }
 
-  const renderGamingList = () => {
+  const handleSearchEvent = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === "Enter") {
+      handleSearchFetch();
+    }
+  };
+
+  const renderHomeList = () => {
     return <AllCardContainer>{VideoList}</AllCardContainer>;
-  };
-
-  const renderLoadingView = () => {
-    return (
-      <HomeLoaderContianer>
-        <Loader />
-      </HomeLoaderContianer>
-    );
-  };
-
-  const renderFailureView = () => {
-    return <Failure />;
   };
 
   return (
     <SideContentContainer>
       {!isBannerClose && <HomeBanner handleCloseEvent={handleRemoveBanner} />}
-      <SearchVideoListContainer>
+      <SearchVideoListContainer
+        style={{
+          height: !isBannerClose ? "calc(100% - 305px)" : "calc(100% - 78px)",
+        }}
+      >
         <SearchBar>
-          <SearchInput
-            type="search"
-            placeholder={t("search") + ""}
-            id="SearchInput"
+          <SearchImageContainer>
+            <SearchInput
+              type="search"
+              placeholder={t("search") + ""}
+              id="SearchInput"
+              onKeyUp={handleSearchEvent}
+            />
+            <SearchImg
+              onClick={handleSearchFetch}
+              className="fa-solid fa-magnifying-glass"
+            ></SearchImg>
+          </SearchImageContainer>
+          <FilterList
+            List={homeList.HomeListContainer}
+            onAction={FilterdList}
+            isDisabled={false}
+            type="HomeFilter"
           />
-          <SearchImg
-            onClick={handleSearchFetch}
-            className="fa-solid fa-magnifying-glass"
-          ></SearchImg>
         </SearchBar>
         <LoadingWrapper
+          css={HomeLoaderContianer}
+          type="home"
           apiStatus={homeList.ApiStatus}
-          renderLoadingUi={renderLoadingView}
-          renderFailureUi={renderFailureView}
-          renderSuccessUi={renderGamingList}
+          renderSuccessUi={renderHomeList}
         ></LoadingWrapper>
         {videoList.length === 0 && homeList.ApiStatus === "success" && (
           <NoSearchResults onChange={handleRetrySearch} />

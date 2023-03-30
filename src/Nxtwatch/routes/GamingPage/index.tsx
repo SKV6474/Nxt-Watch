@@ -1,15 +1,9 @@
-import {
-  JSXElementConstructor,
-  ReactElement,
-  ReactFragment,
-  useEffect,
-} from "react";
+import { useEffect } from "react";
 import { observer } from "mobx-react";
 
 import SideBarHeader from "../../../Common/components/sideBarHeader";
-import Failure from "../../../Common/components/Failure";
-import Loader from "../../../Common/components/Loader";
 import LoadingWrapper from "../../../Common/components/LoadingWrapper";
+import FilterList from "../../../Common/components/Filter";
 
 import WithHeader from "../../hocs/withHeaderHoc/index";
 import WithSideBar from "../../hocs/withSideBarHoc/index";
@@ -19,8 +13,8 @@ import GamingCard from "../../components/GamingCard";
 import { gameList } from "../../stores";
 
 import {
+  FilterListWrapper,
   GameRouteContainer,
-  LoaderContainer,
   SideContentContainer,
 } from "../../styledComponent";
 
@@ -28,20 +22,13 @@ const GamingRoute = observer(() => {
   const gamingList = gameList.GamingList;
 
   useEffect(() => {
-    if (gameList.ApiStatus === "failure" || gameList.ApiStatus === "loading") {
+    if (gameList.ApiStatus !== "success") {
+      console.log("Gaming Route");
       gameList.fetchGameData();
     }
   }, []);
 
-  let GamingCardList:
-    | string
-    | number
-    | boolean
-    | JSX.Element[]
-    | ReactElement<any, string | JSXElementConstructor<any>>
-    | ReactFragment
-    | null
-    | undefined;
+  let GamingCardList: JSX.Element[];
 
   if (gamingList.length !== 0) {
     GamingCardList = gamingList?.map((ele) => (
@@ -49,37 +36,34 @@ const GamingRoute = observer(() => {
     ));
   }
 
+  const FilterdList = (list: any) => {
+    gameList.filterList(list);
+  };
+
   const renderGamingList = () => {
     return (
       <>
         <SideBarHeader type="gaming" />
+        <FilterListWrapper>
+          <FilterList
+            List={gameList.GamingListContainer}
+            onAction={FilterdList}
+            isDisabled={true}
+            type="GamingFilter"
+          />
+        </FilterListWrapper>
         <GameRouteContainer>{GamingCardList}</GameRouteContainer>
       </>
     );
-  };
-
-  const renderLoadingView = () => {
-    return (
-      <>
-        <SideBarHeader type="gaming" />
-        <LoaderContainer>
-          <Loader />
-        </LoaderContainer>
-      </>
-    );
-  };
-
-  const renderFailureView = () => {
-    return <Failure />;
   };
 
   return (
     <>
       <SideContentContainer>
         <LoadingWrapper
+          css=""
+          type="gaming"
           apiStatus={gameList.ApiStatus}
-          renderLoadingUi={renderLoadingView}
-          renderFailureUi={renderFailureView}
           renderSuccessUi={renderGamingList}
         ></LoadingWrapper>
       </SideContentContainer>

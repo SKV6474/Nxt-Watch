@@ -71,6 +71,9 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
     setIsSave(!isSave);
   };
 
+  const urlParams = new URLSearchParams(window.location.search);
+  const startTime = urlParams.get("t") || "0";
+
   return (
     <>
       <VideoPlayer>
@@ -78,7 +81,16 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
           url={videoDetails?.video_url}
           width="100%"
           height="100%"
+          playing
           controls
+          muted
+          config={{
+            youtube: {
+              playerVars: {
+                start: parseInt(startTime),
+              },
+            },
+          }}
         />
       </VideoPlayer>
       <VideoTitle>{videoDetails?.title}</VideoTitle>
