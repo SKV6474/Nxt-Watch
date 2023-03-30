@@ -87,3 +87,13 @@ export type VideoDetailProps = {
 export interface SideHeaderBarProps extends WithTranslation {
   type: string;
 }
+
+export type LoginComponent = {
+  onSubmitForm: (userDetails: UserDeatailsType) => void;
+  onLoginEvent: (data: any) => any;
+};
+
+export type LoginComponentProp = {
+  onSubmitForm: (userDetails: UserDeatailsType) => void;
+  HistoryProp: Props;
+};

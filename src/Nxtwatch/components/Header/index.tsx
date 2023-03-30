@@ -39,10 +39,12 @@ import {
   removeAllDataFromLocalStorage,
   sendToLocalStorage,
 } from "../../utils";
+import { useLocation } from "react-router-dom";
 
 const HeaderComponent = (props: Props) => {
   const { history } = props;
   const { t, i18n } = useTranslation();
+  const location = useLocation();
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
@@ -62,6 +64,7 @@ const HeaderComponent = (props: Props) => {
   const handleConfirmedLogout = () => {
     history.replace("/login");
     RemoveCookies();
+    sendToLocalStorage("lastPath", location.pathname);
     removeAllDataFromLocalStorage();
   };
 

@@ -7,9 +7,9 @@ import { LoginApi } from "../../services/AuthService/index.api";
 
 const LoginRoute = observer((props: Props) => {
   const handleSubmit = async (userDetails: UserDeatailsType) => {
-    LoginApi(userDetails, props);
+    return await LoginApi(userDetails, props);
   };
 
-  return <LoginComponent onSubmitForm={handleSubmit} />;
+  return <LoginComponent onSubmitForm={handleSubmit} HistoryProp={props} />;
 });
 export default LoginRoute;

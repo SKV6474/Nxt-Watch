@@ -1,11 +1,12 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+
+import { sendToLocalStorage } from "../../../../Nxtwatch/utils";
 import {
   LanguageDiv,
   LanguageEn,
   LanguageHindi,
-} from "../../../styledComponent";
-import { sendToLocalStorage } from "../../../utils";
+} from "../../../../Nxtwatch/styledComponent";
 
 const LanguageChangeComponent = () => {
   const { i18n } = useTranslation();
