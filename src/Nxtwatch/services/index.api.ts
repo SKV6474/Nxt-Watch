@@ -51,6 +51,5 @@ export const CallVideoApi = async (id: string) => {
     method: "GET",
     headers: { Authorization: `Bearer ${Cookies.get("jwt_token")}` },
   });
-
   return handleResponse(response);
 };
