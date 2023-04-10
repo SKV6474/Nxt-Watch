@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { BannerProp } from "../../interface";
@@ -22,7 +22,12 @@ const HomeBanner = (props: BannerProp) => {
     <HeaderImage>
       <ImgContainer>
         <ImgStyle src={NXT_WATCH_LOGO_LIGHT_THEME} alt="Banner" />
-        <RemoveImg onClick={handleCloseEvent} src={ClOSE_ICON} alt="close" />
+        <RemoveImg
+          id="CloseIcon"
+          onClick={handleCloseEvent}
+          src={ClOSE_ICON}
+          alt="close"
+        />
       </ImgContainer>
       <ContentDiv>{t("Pre_paid")}</ContentDiv>
       <GetItNowBtn>{t("get_it_now")}</GetItNowBtn>

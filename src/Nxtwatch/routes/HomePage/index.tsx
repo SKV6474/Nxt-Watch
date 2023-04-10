@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { initReactI18next, useTranslation } from "react-i18next";
 
+import i18n from "../../../Common/components/i18n";
 import LoadingWrapper from "../../../Common/components/LoadingWrapper";
 
 import WithHeader from "../../hocs/withHeaderHoc";
@@ -27,6 +28,8 @@ import {
   HomeLoaderContianer,
 } from "../../styledComponent";
 
+initReactI18next.init(i18n);
+
 const HomeRoute = observer(() => {
   const { t } = useTranslation();
   const videoList = homeList.HomeList;
@@ -48,7 +51,6 @@ const HomeRoute = observer(() => {
 
   useEffect(() => {
     if (homeList.ApiStatus !== "success") {
-      console.log(" Home Route");
       homeList.fetchHomeData("");
     }
   }, []);

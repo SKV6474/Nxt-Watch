@@ -15,7 +15,7 @@ const Menu = (props: MenuCloseFunc) => {
 
   return (
     <>
-      <MenuContainer>
+      <MenuContainer id="MenuPopUp">
         <MenuClose onClick={handleCloseMenu}>
           <i className="fa-solid fa-xmark"></i>
         </MenuClose>

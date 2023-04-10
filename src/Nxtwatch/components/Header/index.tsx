@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
-import { RemoveCookies } from "../../../Authentication/utils";
+import i18n from "../../../Common/components/i18n";
 import LogoImg from "../../../Common/components/logoImg";
+import { RemoveCookies } from "../../../Authentication/utils";
 
 import { Props } from "../../interface";
 import { Themes } from "../../stores";
@@ -39,9 +41,10 @@ import {
   removeAllDataFromLocalStorage,
   sendToLocalStorage,
 } from "../../utils";
-import { useLocation } from "react-router-dom";
 
-const HeaderComponent = (props: Props) => {
+initReactI18next.init(i18n);
+
+const HeaderComponent = (props: any) => {
   const { history } = props;
   const { t, i18n } = useTranslation();
   const location = useLocation();
@@ -55,7 +58,7 @@ const HeaderComponent = (props: Props) => {
       (document.getElementById("Language") as HTMLInputElement).value = value;
       i18n.changeLanguage(value);
     }
-  }, [value]);
+  }, [value, i18n]);
 
   const handleThemeChange = () => {
     Themes.toggleThemeMode();
@@ -118,12 +121,14 @@ const HeaderComponent = (props: Props) => {
           <ProfileImg src={NXT_WATCH_PROFILE} alt="profile"></ProfileImg>
           {Themes.Theme === "light" ? (
             <MenuImg
+              id="MenuPopUpTracker"
               onClick={handleToggleMenuShow}
               src={MENU_BAR_LIGHT_THEME}
               alt="Menu"
             />
           ) : (
             <MenuImg
+              id="MenuPopUpTracker"
               onClick={handleToggleMenuShow}
               src={MENU_BAR_DARK_THEME}
               alt="Menu"
@@ -133,18 +138,20 @@ const HeaderComponent = (props: Props) => {
         <div>
           {Themes.Theme === "light" ? (
             <Logoutimg
+              className="LogOutBtn"
               onClick={handleToggleLogoutCancel}
               src={LOGOUT_LIGHT_THEME}
               alt="logout"
             />
           ) : (
             <Logoutimg
+              className="LogOutBtn"
               onClick={handleToggleLogoutCancel}
               src={LOGOUT_DARK_THEME}
               alt="logout"
             />
           )}
-          <LogoutBtn onClick={handleToggleLogoutCancel}>
+          <LogoutBtn id="LogOutBtnId" onClick={handleToggleLogoutCancel}>
             <b>{t("logout")}</b>
           </LogoutBtn>
         </div>

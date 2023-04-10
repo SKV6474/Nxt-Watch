@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { inject } from "mobx-react";
+import { initReactI18next, useTranslation } from "react-i18next";
 
+import i18n from "../../../Common/components/i18n";
 import { getTime } from "../../../Nxtwatch/utils";
 
 import { VideoDetailProps } from "../../interface";
@@ -23,15 +25,17 @@ import {
   VideoTitle,
 } from "../../../Nxtwatch/styledComponent";
 
-import { useTranslation } from "react-i18next";
+initReactI18next.init(i18n);
 
 const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
-  const { t } = useTranslation();
+  console.log("Video Detail Comp >>>");
+  // const { t } = useTranslation();
   const { videoDetails, index } = props;
 
   let isAlreadySaved: boolean = false;
   if (index !== -1) {
     isAlreadySaved = true;
+    console.log(" is Already Saved", isAlreadySaved);
   }
 
   const [isLike, setIsLike] = useState<boolean>();
@@ -74,8 +78,9 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
   const urlParams = new URLSearchParams(window.location.search);
   const startTime = urlParams.get("t") || "0";
 
-  return (
-    <>
+  const getVideoPlayer = () => {
+    console.log("get Video Player");
+    return (
       <VideoPlayer>
         <ReactPlayer
           url={videoDetails?.video_url}
@@ -93,14 +98,23 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
           }}
         />
       </VideoPlayer>
+    );
+  };
+
+  console.log("Video Details Above Return >>");
+  return (
+    <>
+      {/* <div id="LikeBtnId"></div> */}
+      {getVideoPlayer()}
       <VideoTitle>{videoDetails?.title}</VideoTitle>
       <VideoDetailIntractionContainer>
         <DataContainer>
-          {`${videoDetails?.view_count}`} {t("views")} <Dot />
-          {`${getTime(videoDetails?.published_at)}`} {t("years ago")}{" "}
+          {/* {`${videoDetails?.view_count}`} {t("views")} <Dot />
+          {`${getTime(videoDetails?.published_at)}`} {t("years ago")}{" "} */}
         </DataContainer>
         <VideoIntraction>
           <div
+            id="LikeBtnId"
             style={{
               color: isLike ? "#3b82f6" : "",
               width: "70px",
@@ -109,7 +123,7 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
             }}
             onClick={handleLike}
           >
-            <i className="fa-regular fa-thumbs-up"></i> {t("Like")}
+            {/* <i className="fa-regular fa-thumbs-up"></i> {t("Like")} */}
           </div>
           <div
             style={{
@@ -118,16 +132,16 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
             }}
             onClick={handleDislike}
           >
-            <i className="fa-regular fa-thumbs-down"></i> {t("Dislike")}
+            {/* <i className="fa-regular fa-thumbs-down"></i> {t("Dislike")} */}
           </div>
           <div
             style={{
               color: isSave ? "#3b82f6" : "",
               textAlign: "center",
             }}
+            onClick={handleSave}
           >
-            <i className="fa-solid fa-bookmark" onClick={handleSave}></i>{" "}
-            {t("Save")}
+            {/* <i className="fa-solid fa-bookmark"></i> {t("Save")} */}
           </div>
         </VideoIntraction>
       </VideoDetailIntractionContainer>
@@ -141,7 +155,7 @@ const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
         <div>
           <ChannelName>{videoDetails?.channel.name}</ChannelName>
           <ChannelSubscriber>
-            {`${videoDetails?.channel.subscriber_count}`} {t("subscribers")}
+            {/* {`${videoDetails?.channel.subscriber_count}`} {t("subscribers")} */}
           </ChannelSubscriber>
         </div>
       </VideoChannelContainer>

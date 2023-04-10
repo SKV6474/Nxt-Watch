@@ -21,7 +21,7 @@ const FilterList = (props: any) => {
     }
     (document.getElementById("filter") as HTMLInputElement).value = typeValue;
     handleFilteration();
-  }, [List]);
+  }, [List, type]);
 
   const FilterData = (
     l: number,
