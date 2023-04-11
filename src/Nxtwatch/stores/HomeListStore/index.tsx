@@ -1,7 +1,7 @@
 import { action, observable } from "mobx";
 
 import { ApiStatus, VideosList } from "../../interface";
-import { CallHomeApi } from "../../services/index.api";
+import { CallHomeApi, fixtureHomeApiCall } from "../../services/index.api";
 
 class HomeList {
   @observable HomeList: VideosList[] = [];
@@ -20,6 +20,13 @@ class HomeList {
     } catch (e) {
       this.ApiStatus = ApiStatus.failure;
     }
+  };
+
+  @action.bound
+  fetchFixtureList = () => {
+    const response = fixtureHomeApiCall();
+    this.HomeList = response;
+    this.ApiStatus = ApiStatus.success;
   };
 
   @action.bound

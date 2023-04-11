@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
 import { Provider } from "mobx-react";
 import { MemoryRouter } from "react-router-dom";
 import VideoDetail from ".";
@@ -6,7 +6,12 @@ import { saveList } from "../../stores";
 import { VideoDetailObjectFixture } from "./index.fixture";
 
 describe("VideoDetail", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "warn").mockImplementation(() => {});
+  });
+
   it("isLiked ", async () => {
+    const promise = Promise.resolve();
     const { container } = render(
       <Provider saveList={saveList}>
         <MemoryRouter>
@@ -15,20 +20,17 @@ describe("VideoDetail", () => {
       </Provider>
     );
 
-    console.log("Container >>", document.body.innerHTML);
-    let myElement;
+    const myElement = container.querySelector("#LikeBtnId");
+    if (myElement !== null) {
+      fireEvent.click(myElement);
+    }
 
-    // await waitFor(() => {
-    myElement = container.querySelector("#LikeBtnId");
-    // if (myElement !== null) {
-    //   fireEvent.click(myElement);
-    // }
-    // });
-    // const myElemen = container.querySelector("#LikeBtnId");
-    // if (myElemen !== null) {
-    //   const style = window.getComputedStyle(myElemen);
-    //   expect(style.color).not.toBe("#3b82f6");
-    expect(myElement).toBeInTheDocument();
+    const myElemen = container.querySelector("#LikeBtnId");
+    if (myElemen !== null) {
+      const style = window.getComputedStyle(myElemen);
+      expect(style.color).toBe("rgb(59, 130, 246)");
+    }
+
+    await act(() => promise);
   });
-  // });
 });

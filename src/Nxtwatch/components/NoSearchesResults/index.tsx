@@ -21,7 +21,9 @@ const NoSearchResults = (props: { onChange: () => void }) => {
       <NoSearchContent>
         {t("Try different key words or remove search filter")}
       </NoSearchContent>
-      <RetryBtn onClick={() => onChange()}>{t("Retry")}</RetryBtn>
+      <RetryBtn id="NoSearchRetryId" onClick={() => onChange()}>
+        {t("Retry")}
+      </RetryBtn>
     </NoSearchDiv>
   );
 };

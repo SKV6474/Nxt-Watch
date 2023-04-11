@@ -1,7 +1,10 @@
 import { action, observable } from "mobx";
 
 import { ApiStatus, TrendingOrSaved } from "../../interface";
-import { CallTrendingApi } from "../../services/index.api";
+import {
+  CallTrendingApi,
+  fixtureTrendingApiCall,
+} from "../../services/index.api";
 
 class TrendingList {
   @observable TrendingList: TrendingOrSaved[] = [];
@@ -21,6 +24,13 @@ class TrendingList {
     } catch (e) {
       this.ApiStatus = ApiStatus.failure;
     }
+  };
+
+  @action.bound
+  fetchFixtureList = () => {
+    const response = fixtureTrendingApiCall();
+    this.TrendingList = response;
+    this.ApiStatus = ApiStatus.success;
   };
 
   @action.bound

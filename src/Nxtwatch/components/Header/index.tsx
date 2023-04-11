@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
-import i18n from "../../../Common/components/i18n";
 import LogoImg from "../../../Common/components/logoImg";
 import { RemoveCookies } from "../../../Authentication/utils";
 
-import { Props } from "../../interface";
+// import { Props } from "../../interface";
 import { Themes } from "../../stores";
 
 import LogOutPopup from "../PopupDesignPage/logOut";
@@ -42,11 +41,8 @@ import {
   sendToLocalStorage,
 } from "../../utils";
 
-initReactI18next.init(i18n);
-
 const HeaderComponent = (props: any) => {
-  const { history } = props;
-  const { t, i18n } = useTranslation();
+  const { history, t, i18n } = props;
   const location = useLocation();
 
   const [isLinkPop, setIsLinkPop] = useState(false);
@@ -106,12 +102,14 @@ const HeaderComponent = (props: any) => {
           }}
         >
           <DarkImg
+            id="DarkImgId"
             onClick={handleThemeChange}
             src={MOON_LIGHT_THEME}
             alt="Dark Theme"
           ></DarkImg>
 
           <LightImg
+            id="LightImgId"
             onClick={handleThemeChange}
             src={TORCH_DARK_THEME}
             alt="Light Theme"
@@ -167,4 +165,4 @@ const HeaderComponent = (props: any) => {
   );
 };
 
-export default HeaderComponent;
+export default withTranslation()(HeaderComponent);

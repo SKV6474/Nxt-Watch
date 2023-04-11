@@ -13,6 +13,7 @@ const LanguageChangeComponent = () => {
   return (
     <LanguageDiv>
       <LanguageEn
+        id="EnglishBtnId"
         onClick={() => {
           i18n.changeLanguage("en");
           sendToLocalStorage("i18nextLng", "en");
@@ -21,6 +22,7 @@ const LanguageChangeComponent = () => {
         English
       </LanguageEn>
       <LanguageHindi
+        id="HindiBtnId"
         onClick={() => {
           i18n.changeLanguage("hindi");
           sendToLocalStorage("i18nextLng", "hindi");

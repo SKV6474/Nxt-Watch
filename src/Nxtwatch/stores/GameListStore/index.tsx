@@ -1,6 +1,6 @@
 import { action, observable } from "mobx";
 
-import { CallGameApi } from "../../services/index.api";
+import { CallGameApi, fixtureGameApiCall } from "../../services/index.api";
 import { ApiStatus, GameObject } from "../../interface";
 class GameList {
   @observable GamingList: GameObject[] = [];
@@ -20,6 +20,13 @@ class GameList {
     } catch (e) {
       this.ApiStatus = ApiStatus.failure;
     }
+  };
+
+  @action.bound
+  fetchFixtureList = () => {
+    const response = fixtureGameApiCall();
+    this.GamingList = response;
+    this.ApiStatus = ApiStatus.success;
   };
 
   @action.bound

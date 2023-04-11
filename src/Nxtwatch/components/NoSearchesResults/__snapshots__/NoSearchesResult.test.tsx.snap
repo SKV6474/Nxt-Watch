@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoSearch Video NoSearch Video renders correctly 1`] = `
+<div
+  className="sc-fYdXmn gZsElE"
+>
+  <img
+    alt="No Videos"
+    className="sc-dxroEu kHDFbZ"
+    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png "
+  />
+  <div
+    className="sc-UxxwN ieiWmt"
+  >
+    No Search results found
+  </div>
+  <div
+    className="sc-jJgynQ IRpEs"
+  >
+    Try different key words or remove search filter
+  </div>
+  <button
+    className="sc-bbpGSz hdcQam"
+    id="NoSearchRetryId"
+    onClick={[Function]}
+  >
+    Retry
+  </button>
+</div>
+`;

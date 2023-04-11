@@ -10,7 +10,7 @@ import WithSideBar from "../../hocs/withSideBarHoc";
 
 import HomeBanner from "../../components/HomeBanner";
 import VideoCard from "../../components/HomeVideoLinkCard";
-import NoSearchResults from "../../components/NoSearchsResults";
+import NoSearchResults from "../../components/NoSearchesResults";
 import FilterList from "../../../Common/components/Filter";
 
 import { VideosList } from "../../interface";
@@ -85,7 +85,7 @@ const HomeRoute = observer(() => {
   };
 
   return (
-    <SideContentContainer>
+    <SideContentContainer id="SideWithContent">
       {!isBannerClose && <HomeBanner handleCloseEvent={handleRemoveBanner} />}
       <SearchVideoListContainer
         style={{

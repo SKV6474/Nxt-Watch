@@ -1,5 +1,5 @@
 import { LoadingWrapperProp } from "../../../Nxtwatch/interface";
-import FailureUi from "../RenderView/FailureView";
+import FailureUi from "../RenderView/Failure";
 import RenderLoadingsView from "../RenderView/LoadingView";
 
 const LoadingWrapper = (props: LoadingWrapperProp): any => {

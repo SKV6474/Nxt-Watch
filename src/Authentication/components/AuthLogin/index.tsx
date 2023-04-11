@@ -53,6 +53,7 @@ const AuthLogin = (props: LoginComponent): any => {
         <InputDiv>
           <Label>{t("username")}</Label>
           <UserInput
+            id="usernameId"
             style={{
               backgroundColor: userDetails.username.length > 0 ? "#e2e8f0" : "",
               caretColor: userDetails.username.length > 0 ? "#000" : "",
@@ -66,6 +67,7 @@ const AuthLogin = (props: LoginComponent): any => {
         <InputDiv>
           <Label>{t("password")}</Label>
           <Input
+            id="passwordId"
             placeholder={t("password") + ""}
             type={isShowPassword ? "none" : "password"}
             onChange={handlePassword}
@@ -73,11 +75,15 @@ const AuthLogin = (props: LoginComponent): any => {
         </InputDiv>
 
         <ShowDiv>
-          <Check type="checkbox" onChange={handleCheckEvent} />
+          <Check
+            id="IsShowPasswordId"
+            type="checkbox"
+            onChange={handleCheckEvent}
+          />
           <div>{t("show_password")}</div>
         </ShowDiv>
 
-        <LoginBtn type="submit">
+        <LoginBtn id="loginBtnId" type="submit">
           <b>{t("login")}</b>
         </LoginBtn>
         <LanguageChangeComponent />

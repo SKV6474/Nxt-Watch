@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Themes } from "../../../Nxtwatch/stores";
+import { Themes } from "../../../../Nxtwatch/stores";
 import {
   FAILURE_VIEW_DARK,
   FAILURE_VIEW_LIGHT,
-} from "../../../Nxtwatch/constants/Images";
+} from "../../../../Nxtwatch/constants/Images";
 
 import {
   FailureContainer,
@@ -16,7 +16,7 @@ import {
   RetryBtn,
 } from "./styledComponets";
 
-const Failure = () => {
+const FailureUi = () => {
   const { t } = useTranslation();
   return (
     <FailureContainer>
@@ -44,4 +44,4 @@ const Failure = () => {
   );
 };
 
-export default Failure;
+export default FailureUi;

@@ -615,7 +615,7 @@ export const Dot = styled.div`
 // Home No Search
 
 export const NoSearchDiv = styled.div`
-  padding: 40px 0 0;
+  padding: 10px 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;

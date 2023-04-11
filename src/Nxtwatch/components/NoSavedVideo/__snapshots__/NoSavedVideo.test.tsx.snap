@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoSaved Video renders correctly 1`] = `
+<div
+  className="sc-gHbYXZ fKFcol"
+>
+  <img
+    alt="No Saved videos"
+    className="sc-etAVug hvptBg"
+    src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-saved-videos-img.png"
+  />
+  <div
+    className="sc-fGjrnr fMkVhE"
+  >
+    <div
+      className="sc-dsInJy giBYKy"
+    >
+      No saved videos found
+    </div>
+    <div
+      className="sc-dlUsjx gewwyx"
+    >
+      you can save your videos while watching them
+    </div>
+  </div>
+</div>
+`;

@@ -1,5 +1,7 @@
+import { ThreeDots } from "react-loader-spinner";
+
 import { LoaderContainer } from "../../../../Nxtwatch/styledComponent";
-import Loader from "../../Loader";
+
 import SideBarHeader from "../../sideBarHeader";
 
 const RenderLoadingsView = (routeType: string, css: string) => {
@@ -9,7 +11,9 @@ const RenderLoadingsView = (routeType: string, css: string) => {
         <SideBarHeader type={routeType} />
       )}
       <LoaderContainer css={css}>
-        <Loader />
+        <div className="loader-container" data-testid="loader">
+          <ThreeDots color="#3b82f6" height={50} width={50} />
+        </div>
       </LoaderContainer>
     </>
   );

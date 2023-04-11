@@ -31,7 +31,9 @@ const LogOutPopup = (props: LogoutFunctions) => {
       <LogOutContent>
         <LogoutMsg>{t("Are you sure you want to logout?")}</LogoutMsg>
         <BtnContainer>
-          <CancelBtn onClick={handleCancelEvent}>{t("cancel")}</CancelBtn>
+          <CancelBtn id="CancelBtnId" onClick={handleCancelEvent}>
+            {t("cancel")}
+          </CancelBtn>
           <ConfirmBtn onClick={handleConfirmEvent}>{t("Confirm")}</ConfirmBtn>
         </BtnContainer>
       </LogOutContent>

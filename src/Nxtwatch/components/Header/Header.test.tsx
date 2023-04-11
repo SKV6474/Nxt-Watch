@@ -1,28 +1,35 @@
-import { fireEvent, render, waitFor } from "@testing-library/react";
-import ReactDOM from "react-dom";
-import { act } from "react-dom/test-utils";
+import { fireEvent, render } from "@testing-library/react";
+
 import { MemoryRouter, Route } from "react-router-dom";
 import HeaderComponent from ".";
 
-const handleToggleLogoutCancel = jest.fn();
-
 describe("Header Component", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "warn").mockImplementation(() => {});
+  });
+
   it("Test for LogoutPopup", async () => {
     const { container } = render(
       <MemoryRouter>
         <Route exact path="*" component={HeaderComponent} />
       </MemoryRouter>
     );
-    await waitFor(() => {
-      const myElement = container.querySelector("#LogOutBtnId") as Element;
 
-      if (myElement !== null) {
-        fireEvent.click(myElement);
-      }
+    const myElement = container.querySelector("#LogOutBtnId") as Element;
 
-      const LogoutPopup = container.querySelector("#LogOutPopUp");
-      expect(LogoutPopup).toBeInTheDocument();
-    });
+    if (myElement !== null) {
+      fireEvent.click(myElement);
+    }
+
+    const LogoutPopup = container.querySelector("#LogOutPopUp");
+    expect(LogoutPopup).toBeInTheDocument();
+
+    const CancelBtnElement = container.querySelector("#CancelBtnId");
+    if (CancelBtnElement !== null) {
+      fireEvent.click(CancelBtnElement);
+    }
+    const LogoutPopupOnCancel = container.querySelector("#LogOutPopUp");
+    expect(LogoutPopupOnCancel).not.toBeInTheDocument();
   });
 
   it("Test for Menu Pop Up", async () => {
@@ -32,14 +39,12 @@ describe("Header Component", () => {
       </MemoryRouter>
     );
 
-    await waitFor(() => {
-      const myElement = container.querySelector("#MenuPopUpTracker");
+    const myElement = container.querySelector("#MenuPopUpTracker");
 
-      if (myElement !== null) {
-        fireEvent.click(myElement);
-      }
-      const MenuPopup = container.querySelector("#MenuPopUp");
-      expect(MenuPopup).toBeInTheDocument();
-    });
+    if (myElement !== null) {
+      fireEvent.click(myElement);
+    }
+    const MenuPopup = container.querySelector("#MenuPopUp");
+    expect(MenuPopup).toBeInTheDocument();
   });
 });
