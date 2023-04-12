@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { observer } from "mobx-react";
-import { initReactI18next, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-import i18n from "../../../Common/components/i18n";
 import LoadingWrapper from "../../../Common/components/LoadingWrapper";
 
 import WithHeader from "../../hocs/withHeaderHoc";
@@ -27,8 +26,6 @@ import {
   SearchImageContainer,
   HomeLoaderContianer,
 } from "../../styledComponent";
-
-initReactI18next.init(i18n);
 
 const HomeRoute = observer(() => {
   const { t } = useTranslation();

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import LogoImg from "../../../Common/components/logoImg";
 import { RemoveCookies } from "../../../Authentication/utils";
 
-// import { Props } from "../../interface";
+import { Props } from "../../interface";
 import { Themes } from "../../stores";
 
 import LogOutPopup from "../PopupDesignPage/logOut";
@@ -41,8 +40,9 @@ import {
   sendToLocalStorage,
 } from "../../utils";
 
-const HeaderComponent = (props: any) => {
-  const { history, t, i18n } = props;
+const HeaderComponent = (props: Props) => {
+  const { history } = props;
+  const { t, i18n } = useTranslation();
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
@@ -164,4 +164,4 @@ const HeaderComponent = (props: any) => {
   );
 };
 
-export default withTranslation()(HeaderComponent);
+export default HeaderComponent;

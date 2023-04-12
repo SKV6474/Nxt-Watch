@@ -1,17 +1,13 @@
 import { fireEvent, render } from "@testing-library/react";
-
 import { MemoryRouter, Route } from "react-router-dom";
+
 import HeaderComponent from ".";
 
 describe("Header Component", () => {
-  beforeEach(() => {
-    jest.spyOn(console, "warn").mockImplementation(() => {});
-  });
-
   it("Test for LogoutPopup", () => {
     const { container } = render(
       <MemoryRouter>
-        <HeaderComponent />
+        <Route exact path="*" component={HeaderComponent} />
       </MemoryRouter>
     );
 
@@ -35,7 +31,7 @@ describe("Header Component", () => {
   it("Test for Menu Pop Up", () => {
     const { container } = render(
       <MemoryRouter>
-        <HeaderComponent />
+        <Route exact path="*" component={HeaderComponent} />
       </MemoryRouter>
     );
 

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import { getTime } from "../../../Nxtwatch/utils";
 
 import { saveList } from "../../stores";
+import { VideoDetailProps } from "../../interface";
 
 import {
   BlanklineDiv,
@@ -23,8 +24,11 @@ import {
   VideoTitle,
 } from "../../../Nxtwatch/styledComponent";
 
-const VideoDetail = inject("saveList")((props: any) => {
-  const { videoDetails, index, t } = props;
+const VideoDetail = inject("saveList")((props: VideoDetailProps) => {
+  const { videoDetails, index } = props;
+
+  const { t } = useTranslation();
+
   let isAlreadySaved: boolean = false;
   if (index !== -1) {
     isAlreadySaved = true;
@@ -157,4 +161,4 @@ const VideoDetail = inject("saveList")((props: any) => {
   );
 });
 
-export default withTranslation()(VideoDetail);
+export default VideoDetail;

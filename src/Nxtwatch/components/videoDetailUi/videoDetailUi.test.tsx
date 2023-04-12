@@ -6,10 +6,6 @@ import { saveList } from "../../stores";
 import { VideoDetailObjectFixture } from "./index.fixture";
 
 describe("VideoDetail", () => {
-  beforeEach(() => {
-    jest.spyOn(console, "warn").mockImplementation(() => {});
-  });
-
   it("isLiked ", async () => {
     const promise = Promise.resolve();
     const { container } = render(
