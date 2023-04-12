@@ -43,4 +43,16 @@ describe("NxtWatch Representation", () => {
     // cy.contains("Cancel").click();
     cy.contains("Confirm").click();
   });
+
+  it("to change the language", () => {
+    cy.visit("http://localhost:3000/");
+    cy.viewport(1200, 1000);
+    // cy.get("#HindiBtnId").click();
+    cy.get("#usernameId").type("rahul");
+    cy.get("#passwordId").type("rahul@2021");
+    cy.get("#IsShowPasswordId").click();
+    // cy.get("#EnglishBtnId").click();
+    cy.get("#loginBtnId").click();
+    cy.get("#Language").select("हिंदी");
+  });
 });

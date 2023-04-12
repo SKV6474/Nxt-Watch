@@ -91,7 +91,7 @@ const HeaderComponent = (props: any) => {
         <LogoImg css={HeaderStyle} />
       </div>
       <HeaderMenu>
-        <select id="Language" onClick={handleLanguageChange}>
+        <select id="Language" onChange={handleLanguageChange}>
           <option value="en">English</option>
           <option value="hindi">हिंदी</option>
         </select>
