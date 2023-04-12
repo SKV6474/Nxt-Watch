@@ -13,7 +13,7 @@ class GameList {
   @action.bound
   fetchGameData = async () => {
     try {
-      const Response = this.GameListService.callGameApi();
+      const Response = await this.GameListService.callGameApi();
 
       this.ApiStatus = Response.ApiStatus;
       if (Response.data !== "none") {
@@ -21,6 +21,7 @@ class GameList {
         this.GamingListContainer = Response.data.videos;
       }
     } catch (e) {
+      console.log("hiii");
       this.ApiStatus = ApiStatus.failure;
     }
   };
