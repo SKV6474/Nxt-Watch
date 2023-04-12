@@ -43,7 +43,6 @@ import {
 
 const HeaderComponent = (props: any) => {
   const { history, t, i18n } = props;
-  const location = useLocation();
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
@@ -61,9 +60,9 @@ const HeaderComponent = (props: any) => {
   };
 
   const handleConfirmedLogout = () => {
+    sendToLocalStorage("lastPath", window.location.pathname);
     history.replace("/login");
     RemoveCookies();
-    sendToLocalStorage("lastPath", location.pathname);
     removeAllDataFromLocalStorage();
   };
 

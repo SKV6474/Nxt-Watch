@@ -1,5 +1,21 @@
 import cypress from "cypress";
 
+describe("for Stub Testing for login", () => {
+  beforeEach(() => {
+    cy.intercept("POST", "https://apis.ccbp.in/login", {
+      message: "*username and password didn't match",
+    }).as("users");
+  });
+  it("Api", () => {
+    cy.visit("http://localhost:3000/login");
+    cy.get("#usernameId").type("rahul");
+    cy.get("#passwordId").type("rahul@021");
+    cy.get("#loginBtnId").click();
+    cy.wait("@users");
+    cy.get("#Error").should("have.text", "*username and password didn't match");
+  });
+});
+
 describe("NxtWatch Representation", () => {
   it("Going through all the Route", () => {
     // expect(true).to.equal(true);
@@ -15,7 +31,7 @@ describe("NxtWatch Representation", () => {
     cy.get("#DarkImgId").click();
     // cy.get("#LightImgId").click();
 
-    cy.get("#SideWithContent").scrollTo("center");
+    // cy.get("#SideWithContent").scrollTo("center");
     cy.contains("Trending").click();
     cy.contains("Gaming").click();
     cy.contains("Saved videos").click();

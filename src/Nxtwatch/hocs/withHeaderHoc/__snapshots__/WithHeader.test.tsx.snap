@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Hoc Sanp Shot Test for Header 1`] = `
+<div>
+  <div
+    class="sc-beqWaB jogxOc"
+  >
+    <div
+      class="sc-ehsgIH kivgTm Container"
+    >
+      <div
+        class="sc-hLseeU MBggf"
+      >
+        <div>
+          <div
+            class="sc-gueYoa logoImg___StyledImgDiv-sc-1bmzsyu-0 gCMKuZ oUZDT"
+          >
+            <img
+              alt="logo"
+              class="sc-dmqHEX jKjcqD"
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            />
+          </div>
+        </div>
+        <div
+          class="sc-eDDNvR idlsVM"
+        >
+          <select
+            id="Language"
+          >
+            <option
+              value="en"
+            >
+              English
+            </option>
+            <option
+              value="hindi"
+            >
+              हिंदी
+            </option>
+          </select>
+          <div
+            class="sc-jTrPJq cdkXPP"
+            style="margin-left: 5px;"
+          >
+            <img
+              alt="Dark Theme"
+              class="sc-gLDzan cvZXja"
+              id="DarkImgId"
+              src="https://i.ibb.co/JnkFmhW/icons8-moon-symbol-30.png"
+            />
+            <img
+              alt="Light Theme"
+              class="sc-iAEyYk fnfjmA"
+              id="LightImgId"
+              src="https://i.ibb.co/HtRGC9M/Screenshot-from-2023-03-13-16-43-53.png"
+            />
+          </div>
+          <div
+            class="sc-fsQiph cuUWkx"
+          >
+            <img
+              alt="profile"
+              class="sc-qRumB cTijnI"
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png "
+            />
+            <img
+              alt="Menu"
+              class="sc-jsMahE jFxraO"
+              id="MenuPopUpTracker"
+              src="https://i.ibb.co/zJPR5ZK/Screenshot-from-2023-03-13-17-09-50.png"
+            />
+          </div>
+          <div>
+            <img
+              alt="logout"
+              class="sc-kFuwaP ddYhya LogOutBtn"
+              src="https://i.ibb.co/NNX0S5G/Screenshot-from-2023-03-13-17-10-10.png"
+            />
+            <button
+              class="sc-irTswW cepeJe"
+              id="LogOutBtnId"
+            >
+              <b>
+                logout
+              </b>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="sc-cRZddA kvgWcY sideWithContentContainer"
+      >
+        <div>
+          Test Header
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
