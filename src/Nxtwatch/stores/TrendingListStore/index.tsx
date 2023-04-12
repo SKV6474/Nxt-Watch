@@ -1,20 +1,21 @@
 import { action, observable } from "mobx";
 
 import { ApiStatus, TrendingOrSaved } from "../../interface";
-import {
-  CallTrendingApi,
-  fixtureTrendingApiCall,
-} from "../../services/index.api";
 
 class TrendingList {
   @observable TrendingList: TrendingOrSaved[] = [];
   @observable ApiStatus: ApiStatus = ApiStatus.loading;
   TrendingListContainer: TrendingOrSaved[] = [];
+  TrendingListService: any;
+
+  constructor(service: any) {
+    this.TrendingListService = service;
+  }
 
   @action.bound
   fetchTrendingData = async () => {
     try {
-      const Response = await CallTrendingApi();
+      const Response = await this.TrendingListService.callTrendingApi();
 
       this.ApiStatus = Response.ApiStatus;
       if (Response.data !== "none") {
@@ -28,7 +29,7 @@ class TrendingList {
 
   @action.bound
   fetchFixtureList = () => {
-    const response = fixtureTrendingApiCall();
+    const response = this.TrendingListService.fixtureTrendingApiCall();
     this.TrendingList = response;
     this.ApiStatus = ApiStatus.success;
   };

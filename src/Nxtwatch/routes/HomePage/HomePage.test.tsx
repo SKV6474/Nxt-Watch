@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import HomeRoute from ".";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, Route } from "react-router-dom";
 
 describe("Home Page", () => {
   it("First Test For Home Banner", () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 import SplitPane from "react-split-pane";
 
 import Link from "../../components/Links";
@@ -24,8 +24,8 @@ import { getFromLocalStorage, sendToLocalStorage } from "../../utils";
 const WithSideBar = (
   WrappedComponent: React.ComponentType<any>
 ): React.ComponentType<any> => {
-  const SideBar = (props: Props) => {
-    const { t } = useTranslation();
+  const SideBar = (props: any) => {
+    const { t } = props;
     let width = getFromLocalStorage("SplitPane");
     if (width === undefined) {
       width = 230;
@@ -69,7 +69,7 @@ const WithSideBar = (
       </SplitPane>
     );
   };
-  return SideBar;
+  return withTranslation()(SideBar);
 };
 
 export default WithSideBar;

@@ -1,17 +1,21 @@
 import { action, observable } from "mobx";
 
 import { ApiStatus, VideosList } from "../../interface";
-import { CallHomeApi, fixtureHomeApiCall } from "../../services/index.api";
 
 class HomeList {
   @observable HomeList: VideosList[] = [];
   @observable ApiStatus: ApiStatus = ApiStatus.loading;
   HomeListContainer: VideosList[] = [];
+  HomeVideoService: any;
+
+  constructor(service: any) {
+    this.HomeVideoService = service;
+  }
 
   @action.bound
   fetchHomeData = async (input: string) => {
     try {
-      const Response = await CallHomeApi(input);
+      const Response = await this.HomeVideoService.callHomeApi(input);
       this.ApiStatus = Response.ApiStatus;
       if (Response.data !== "none") {
         this.HomeList = Response.data.videos;
@@ -24,7 +28,7 @@ class HomeList {
 
   @action.bound
   fetchFixtureList = () => {
-    const response = fixtureHomeApiCall();
+    const response = this.HomeVideoService.fixtureHomeApiCall();
     this.HomeList = response;
     this.ApiStatus = ApiStatus.success;
   };

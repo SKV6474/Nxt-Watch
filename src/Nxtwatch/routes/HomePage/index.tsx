@@ -85,7 +85,7 @@ const HomeRoute = observer(() => {
   };
 
   return (
-    <SideContentContainer id="SideWithContent">
+    <SideContentContainer>
       {!isBannerClose && <HomeBanner handleCloseEvent={handleRemoveBanner} />}
       <SearchVideoListContainer
         style={{

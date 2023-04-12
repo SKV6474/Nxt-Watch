@@ -1,16 +1,19 @@
 import { action, observable } from "mobx";
-
-import { CallGameApi, fixtureGameApiCall } from "../../services/index.api";
 import { ApiStatus, GameObject } from "../../interface";
 class GameList {
   @observable GamingList: GameObject[] = [];
   @observable ApiStatus: ApiStatus = ApiStatus.loading;
   GamingListContainer: GameObject[] = [];
+  GameListService: any;
+
+  constructor(service: any) {
+    this.GameListService = service;
+  }
 
   @action.bound
   fetchGameData = async () => {
     try {
-      const Response = await CallGameApi();
+      const Response = this.GameListService.callGameApi();
 
       this.ApiStatus = Response.ApiStatus;
       if (Response.data !== "none") {
@@ -24,7 +27,7 @@ class GameList {
 
   @action.bound
   fetchFixtureList = () => {
-    const response = fixtureGameApiCall();
+    const response = this.GameListService.fixtureGameApiCall();
     this.GamingList = response;
     this.ApiStatus = ApiStatus.success;
   };

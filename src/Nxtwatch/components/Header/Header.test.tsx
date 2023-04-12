@@ -8,10 +8,10 @@ describe("Header Component", () => {
     jest.spyOn(console, "warn").mockImplementation(() => {});
   });
 
-  it("Test for LogoutPopup", async () => {
+  it("Test for LogoutPopup", () => {
     const { container } = render(
       <MemoryRouter>
-        <Route exact path="*" component={HeaderComponent} />
+        <HeaderComponent />
       </MemoryRouter>
     );
 
@@ -32,7 +32,7 @@ describe("Header Component", () => {
     expect(LogoutPopupOnCancel).not.toBeInTheDocument();
   });
 
-  it("Test for Menu Pop Up", async () => {
+  it("Test for Menu Pop Up", () => {
     const { container } = render(
       <MemoryRouter>
         <HeaderComponent />
