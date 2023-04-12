@@ -2,9 +2,7 @@ import cypress from "cypress";
 
 describe("for Stub Testing for login", () => {
   beforeEach(() => {
-    cy.intercept("POST", "https://apis.ccbp.in/login", {
-      message: "*username and password didn't match",
-    }).as("users");
+    cy.intercept("POST", "https://apis.ccbp.in/login").as("users");
   });
   it("Api", () => {
     cy.visit("http://localhost:3000/login");
