@@ -46,12 +46,16 @@ const HeaderComponent = (props: Props) => {
 
   const [isLinkPop, setIsLinkPop] = useState(false);
   const [isLogoutPop, setIsLogoutPop] = useState(false);
-  const value = getFromLocalStorage("i18nextLng");
+  let value = getFromLocalStorage("i18nextLng");
 
   useEffect(() => {
-    if (value === "en" || value === "hindi") {
-      (document.getElementById("Language") as HTMLInputElement).value = value;
-      i18n.changeLanguage(value);
+    if (value === null) {
+      // eslint-disable-next-line
+      value = "en";
+      if (value === "en" || value === "hindi") {
+        (document.getElementById("Language") as HTMLInputElement).value = value;
+        i18n.changeLanguage(value);
+      }
     }
   }, [value, i18n]);
 
