@@ -12,7 +12,6 @@ import {
 
 const FilterList = (props: any) => {
   const { List, onAction, isDisabled, type } = props;
-
   useEffect(() => {
     let typeValue: undefined | string = getFromLocalStorage(type);
 
@@ -21,6 +20,7 @@ const FilterList = (props: any) => {
     }
     (document.getElementById("filter") as HTMLInputElement).value = typeValue;
     handleFilteration();
+    // eslint-disable-next-line
   }, [List, type]);
 
   const FilterData = (

@@ -1,9 +1,8 @@
 import React from "react";
-import { useTranslation, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
 import SplitPane from "react-split-pane";
 
 import Link from "../../components/Links";
-import { Props } from "../../interface";
 import {
   FACEBOOK_LOGO,
   LINKED_IN_LOGO,
